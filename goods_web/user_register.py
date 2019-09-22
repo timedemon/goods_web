@@ -35,6 +35,7 @@ def get_passwd_md5(passwd):
     print(m.hexdigest(), type(m.hexdigest()))
     return m.hexdigest()
 
+
 # 得到用户名
 def get_user_name():
     '''
