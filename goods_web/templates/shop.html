@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物界面</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../static/css/shop.css" />
+<script defer type="text/javascript" src="../static/js/bottom.js"></script>
+<script defer type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+<script defer type="text/javascript" src="../static/js/floatmenu.js"></script>
+<body>
+    <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+    <div class="fy-header">
+
+        <div class="top">
+            <div class="ctx">
+                <div>
+                    {% if uname %}
+                    <a href="/order"><icon class="icon-order" ></icon>我的订单</a>
+                    <a href="/logout"><icon class="icon-logout"></icon>退出</a>
+                    <a>欢迎光临我的商城</a>
+                    <a><icon class="icon-user"></icon>你好，{{ uname }}</a>
+                    {% else %}
+                    <a><icon class="icon-user"></icon>未登录</a>
+                    <a href="/reg"><icon class="icon-register"></icon>注册</a>
+                    <a href="/login"><icon class="icon-login"></icon>登录</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="pic">
+                <div class="img">
+                    <img src="../static/img/1.jpg" alt="">
+                    <img src="../static/img/2.jpg" alt="">
+                    <img src="../static/img/3.jpg" alt="">
+                    <img src="../static/img/4.jpg" alt="">
+                    <img src="../static/img/5.jpg" alt="">
+                </div>
+                <div class="swiper">
+                    <b class='rudis'></b>
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                </div>
+	        </div>
+        </div>
+        <div class="menu">
+            <div class="ctx">
+                <div class="bigmenu">全部商品分类<img src="../static/img/timg.jpg" /></div>
+                <a class="homemenu" href="/">首页</a>
+                <a class="cart" href="/buy_car"><img src="../static/img/timg.jpg" />购物车</a>
+                <div class="floatmenu">
+                <div class="padding-top">
+                    <div class="box">
+                        <div class="title">休闲食品</div>
+                        <div class="link">
+                            <a>饮料冲调</a>
+                            <a>进口食品</a>
+                            <a>饼干零食</a>
+                            <a>膨化食品</a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="title">休闲食品</div>
+                        <div class="link">
+                            <a>饮料冲调</a>
+                            <a>进口食品</a>
+                            <a>饼干零食</a>
+                            <a>膨化食品</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fy-main">
+        <div class="fy-swiper-ad">
+            <div class="ad">
+                <img src="../static/img/goods1.png" />
+            </div>
+        </div>
+        <div class="fy-home-ad">
+            <a><img src="../static/img/goods2.png" /></a>
+            <a><img src="../static/img/goods3.png" /></a>
+            <a><img src="../static/img/goods2.png" /></a>
+        </div>
+        <div class="fy-home-title">
+            <div class="text">
+                <span class="title">休闲食品</span>
+                <span class="en">Snacks</span>
+            </div>
+        </div>
+        <div class="fy-home-product">
+            <a class="hot"><img src="../static/img/goods4.png" /></a>
+            <div class="other">
+                <a class="big" href="/latiao_info">
+                    <div class="left">
+                        <span class="title">辣条</span>
+                        <div class="line"></div>
+                        <span class="price" id="latiao">￥{{ lt_price }}</span>
+                    </div>
+                    <img src="../static/img/goods4.png" />
+                </a>
+                <a class="small" href="/kele_info">
+                    <img src="../static/img/1.jpg" />
+                    <span class="title">可乐</span>
+                    <span class="price">￥{{ kele_price }}</span>
+                </a>
+                <a class="small" href="/dounai_info">
+                    <img src="../static/img/2.jpg" />
+                    <span class="title">豆奶</span>
+                    <span class="price">￥{{ dounai_price }}</span>
+                </a>
+                <a class="small" href="/binggan_info">
+                    <img src="../static/img/3.jpg" />
+                    <span class="title">饼干</span>
+                    <span class="price">￥{{ binggan_price }}</span>
+                </a>
+                <a class="small" href="/kele_info">
+                    <img src="../static/img/4.jpg" />
+                    <span class="title">可乐</span>
+                    <span class="price">￥{{ kele_price }}</span>
+                </a>
+                <a class="big" href="/latiao_info">
+                    <div class="left">
+                        <span class="title">辣条</span>
+                        <div class="line"></div>
+                        <span class="price">￥{{ lt_price }}</span>
+                    </div>
+                    <img src="../static/img/5.jpg" />
+                </a>
+            </div>
+        </div>
+        <div class="fy-home-title">
+            <div class="text">
+                <span class="title">粮油米面</span>
+                <span class="en">Snacks</span>
+            </div>
+        </div>
+        <div class="fy-home-product">
+            <a class="hot"><img src="../static/img/goods4.png" /></a>
+            <div class="other">
+                <a class="big">
+                    <div class="left">
+                        <span class="title">九三物理压榨浓香型花生油</span>
+                        <div class="line"></div>
+                        <span class="price">￥120</span>
+                    </div>
+                    <img src="../static/img/guidao.png" />
+                </a>
+                <a class="small">
+                    <img src="../static/img/guidao.png" />
+                    <span class="title">九三物理压榨浓香型花生油</span>
+                    <span class="price">￥120</span>
+                </a>
+                <a class="small">
+                    <img src="../static/img/timg.jpg" />
+                    <span class="title">九三物理压榨浓香型花生油</span>
+                    <span class="price">￥120</span>
+                </a>
+
+                <a class="small">
+                    <img src="../static/img/1.jpg" />
+                    <span class="title">九三物理压榨浓香型花生油</span>
+                    <span class="price">￥120</span>
+                </a>
+                <a class="small">
+                    <img src="../static/img/2.jpg" />
+                    <span class="title">九三物理压榨浓香型花生油</span>
+                    <span class="price">￥120</span>
+                </a>
+                <a class="big">
+                    <div class="left">
+                        <span class="title">九三物理压榨浓香型花生油</span>
+                        <div class="line"></div>
+                        <span class="price">￥120</span>
+                    </div>
+                    <img src="../static/img/3.jpg" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="fy-bottom">
+        <span>邮箱:zzy@itzzy.online  |  鄂ICP备1400000号-2  |  鄂ICP备1400000号</span>
+    </div>
+</body>
+</html>

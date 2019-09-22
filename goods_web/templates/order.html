@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单</title>
+    <style>
+
+        table {
+            border-collapse: collapse;  /* 合并边框 */
+            width: 100%;
+        }
+
+        td, th {
+            padding: 10px;
+            border: 1px solid gray;
+        }
+
+        tr.table_header {
+            background: green;
+            color: white;
+        }
+
+        tr:hover {
+            background: yellow;
+            color: red;
+        }
+
+        p {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post" action="#">
+        <div style="position: fixed; bottom: 50px; right: 50px; z-index: 0; background: gray; padding: 10px;">
+            <button type="submit" name="ready_buy">点我购买</button>
+        </div>
+        {%if address %}
+            <p>您的收货地址为:{{ address }}</p>
+            <p id="goods_info">您的购物信息如下</p>
+            <table>
+                <tr class="table_header"><th>商品名称</th><th>数量</th><th>价格</th></tr>
+                {% for i in rows %}
+                    <tr><td>{{ i[2] }}</td><td>{{ i[3] }}</td><td>{{ i[4] }}</td></tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>请在购物车中填写收货地址</p>
+        {% endif %}
+    </form>
+</body>
+</html>

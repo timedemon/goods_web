@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <style>
+
+        table {
+            border-collapse: collapse;  /* 合并边框 */
+            width: 100%;
+        }
+
+        td, th {
+            padding: 10px;
+            border: 1px solid gray;
+        }
+
+        tr.table_header {
+            background: green;
+            color: white;
+        }
+
+        tr:hover {
+            background: yellow;
+            color: red;
+        }
+
+        p {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post" action="#">
+        <div style="position: fixed; bottom: 50px; right: 50px; z-index: 0; background: gray; padding: 10px;">
+            <button type="submit" name="ready_buy" value="1">点我购买</button>
+        </div>
+        <p id="goods_info">购物篮</p>
+        <table>
+            <tr class="table_header"><th>商品名称</th><th>数量</th><th>价格</th></tr>
+            {% for i in rows %}
+                <tr><td>{{ i[2] }}</td><td>{{ i[3] }}</td><td>{{ i[4] }}</td></tr>
+            {% endfor %}
+        </table>
+        <p> 请输入收货地址</p>
+        <input type="text" name="address" id="address" placeholder="请输入收获地址">
+    </form>
+    <div class="content" >
+        <p>修改购物篮</p>
+         <form action="" method="post">
+                <label for="buy_car_num">请输入修改的数量：</label><input type="text" name="change_goods_num" id="buy_car_num" placeholder="请输入修改数量">
+                <label for="buy_car_name">请输入修改的名称：</label><input type="text" name="change_goods_name" id="buy_car_name" placeholder="请输入修改商品名称">
+                <button type="submit" name="commit_changes" id="submit" value="2">提交修改</button>
+        </form>
+    </div>
+</body>
+</html>

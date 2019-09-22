@@ -1,0 +1,10 @@
+{
+
+  "ip_server": "127.0.0.1",
+  "port_server": 9999,
+  "db_server": "139.196.161.70",
+  "db_port": 3306,
+  "db_user": "zzy",
+  "db_password": "ZZY199720.",
+  "db_name": "user"
+}

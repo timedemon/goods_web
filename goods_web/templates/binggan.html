@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详细信息</title>
+</head>
+     <link rel="stylesheet" type="text/css" href="../static/css/detail_info.css" />
+    <script defer type="text/javascript" src="../static/js/bottom.js"></script>
+    <script  type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+    <script defer type="text/javascript" src="../static/js/floatmenu.js"></script>
+    <script defer type="text/javascript" src="../static/js/detail_info.js"></script>
+    <script>
+        /** php代码 */
+        $(function() {
+            $("#plus").click(function() {
+                var n = $("#number").val(),
+                    num = parseInt(n) + 1;
+                if(num === 0) {
+                    alert("cc");
+                }
+                $("#number").val(num);
+                // alert("ss");
+            });
+            $("#minis").click(function() {
+                var n = $("#number").val(),
+                    num = parseInt(n) - 1;
+                num = num < 1 ? 1 : num;
+                $("#number").val(num);
+                // alert("aa");
+            });
+        });
+    </script>
+<body>
+    <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+    <div class="fy-header">
+        <div class="top">
+            <div class="ctx">
+               <div>
+                    {% if uname %}
+                    <a><icon class="icon-order"></icon>我的订单</a>
+                    <a href="/logout"><icon class="icon-logout"></icon>退出</a>
+                    <a>欢迎光临我的商城</a>
+                    <a><icon class="icon-user"></icon>你好，{{ uname }}</a>
+                    {% else %}
+                    <a><icon class="icon-user"></icon>未登录</a>
+                    <a href="/reg"><icon class="icon-register"></icon>注册</a>
+                    <a href="/login"><icon class="icon-login"></icon>登录</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="pic">
+                <div class="img">
+                    <img src="../static/img/1.jpg" alt="">
+                    <img src="../static/img/2.jpg" alt="">
+                    <img src="../static/img/3.jpg" alt="">
+                    <img src="../static/img/4.jpg" alt="">
+                    <img src="../static/img/5.jpg" alt="">
+                </div>
+                <div class="swiper">
+                    <b class='rudis'></b>
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                </div>
+	        </div>
+        </div>
+        <div class="menu">
+            <div class="ctx">
+                <div class="bigmenu">全部商品分类<img src="../static/img/timg.jpg" /></div>
+                <a class="homemenu" href="shop.html">首页</a>
+                <a class="cart"><img src="../static/img/timg.jpg" />购物车</a>
+                <div class="floatmenu">
+                <div class="padding-top" style="background-color: rgba(238,238,238,0.4)">
+                    <div class="box">
+                        <div class="title">休闲食品</div>
+                        <div class="link">
+                            <a>饮料冲调</a>
+                            <a>进口食品</a>
+                            <a>饼干零食</a>
+                            <a>膨化食品</a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="title">休闲食品</div>
+                        <div class="link">
+                            <a>饮料冲调</a>
+                            <a>进口食品</a>
+                            <a>饼干零食</a>
+                            <a>膨化食品</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="fy-main" style="margin-top: 10rem;">
+        <div class="fy-pro">
+            <div class="left">
+                <div class="pic2"><img src="../static/img/guidao.png" id="defaultImg"></div>
+                <div class="sub-pic">
+                    <img src="../static/img/1.jpg" />
+                    <img src="../static/img/2.jpg"/>
+                    <img src="../static/img/3.jpg"/>
+                    <img src="../static/img/4.jpg"/>
+                </div>
+            </div>
+            <div class="right">
+                <span class="title">饼干</span>
+                <span class="des">纯面粉制作</span>
+                <div class="line"></div>
+                <div class="params">
+                    价格:<span class="price">￥{{ binggan_price }}</span>
+                    原价:<span class="oldprice">￥21.80</span>
+                </div>
+                <form method="post" action="">
+                    <div class="params">
+                        购买数量:
+
+                        <div class="input">
+                            <span id="minis">-</span>
+                            <div><input id="number" name="buy_binggan_num" type="text" value="1"></div>
+                            <span id="plus">+</span>
+                        </div>
+                    </div>
+                    <div class="params">
+                        剩余库存:{{ binggan_num }}件
+                    </div>
+                    <a class="bigbt">立即购买</a>
+                    <button class="bigbt" type="submit" >加入购物车</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="fy-bottom">
+        <span>邮箱:zzy@itzzy.online  |  鄂ICP备1400000号-2  |  鄂ICP备1400000号</span>
+    </div>
+</body>
+</html>

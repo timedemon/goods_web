@@ -1,0 +1,480 @@
+
+body{
+    background-color: #efefef;
+}
+
+.fy-header {
+    width: 100%;
+    height: 12rem;
+    background-color: #efefef;
+}
+
+.fy-header .top {
+    width: 100%;
+    height: 2rem;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.fy-header .top .ctx {
+    width: 75rem;
+    height: 100%;
+    line-height: 2rem;
+    margin: 0 auto;
+    overflow: hidden;
+    position: absolute;
+    right:8%;
+}
+
+.fy-header .top .ctx a {
+    float: right;
+    margin-left: 1rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.fy-header .top .ctx a:hover {
+    color: #d81e06;
+
+}
+
+.fy-header .top .ctx a icon {
+    width: 1rem;
+    height: 1rem;
+    background-position: center;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-bottom: -2px;
+    margin-right: 2px;
+}
+
+
+.fy-header .top .ctx a .icon-login {
+    background-image: url(../img/login.png);
+}
+.fy-header .top .ctx a .icon-logout {
+    background-image: url(../img/out.png);
+}
+.fy-header .top .ctx a .icon-register {
+    background-image: url(../img/reg.png);
+}
+.fy-header .top .ctx a .icon-order {
+    background-image: url(../img/order.png);
+}
+
+.fy-header .top .ctx a:hover .icon-login {
+    background-color: yellow;
+    cursor: pointer;
+}
+.fy-header .top .ctx a:hover .icon-logout {
+    background-color: yellow;
+    cursor: pointer;
+}
+.fy-header .top .ctx a:hover .icon-register {
+    background-color: yellow;
+    cursor: pointer;
+}
+.fy-header .top .ctx a:hover .icon-order {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.pic{
+	position:relative;
+	max-width: 100%;
+	height: 15rem;
+	/*background: url('../img/1.jpg');*/
+}
+.img img{
+	position:absolute;
+	height: 15rem;
+	width: 900px;
+	float: left;
+}
+.img{
+	position: absolute;
+	top: 0;
+	height: 28rem;
+	width: 44rem;
+	margin-left: 20rem;
+}
+.rudis{
+	background-color: #fff;
+}
+
+.swiper{
+	position: absolute;
+	top: 13rem;
+	left: 47rem;
+}
+.swiper b{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border: 2px solid black;
+	border-radius: 50%;
+	margin-left: 10px;
+}
+
+.fy-header .bottom {
+    width: 75rem;
+    height: 44rem;
+    margin: 0 auto;
+    overflow: hidden;
+    position: absolute;
+    right: 20%;
+}
+
+.fy-header .menu {
+    width: 100%;
+    height: 40px;
+    border-bottom: 2px solid #d81e06;
+    position: absolute;
+    top: 40%;
+}
+
+.fy-header .menu .ctx {
+    width: 75rem;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.fy-header .menu .ctx .bigmenu {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    background-color: #D81E06;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 200px;
+    position: relative;
+}
+
+.fy-header .menu .ctx .bigmenu img {
+    width: 18px;
+    height: 18px;
+    margin-bottom: -3px;
+    margin-left: 4px;
+}
+
+.fy-header .menu .ctx .homemenu {
+    float: left;
+    padding: 0px 20px;
+    margin-left: 1rem;
+    height: 40px;
+    line-height: 40px;
+    color: #eeeeee;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: #d71e06;
+    border-radius: 3px;
+
+}
+
+.fy-header .menu .ctx .homemenu:hover {
+    float: left;
+    padding: 0px 20px;
+    margin-left: 1rem;
+    height: 40px;
+    line-height: 40px;
+    color: #d71e06;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: #eeeeee;
+    border-radius: 3px;
+}
+
+.fy-header .menu .ctx .cart {
+    float: right;
+    padding: 0 40px;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    background-color: #D81E06;
+    text-align: center;
+    font-size: 16px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: relative;
+    right: 50px;
+}
+
+.fy-header .menu .ctx .cart img {
+    width: 18px;
+    height: 18px;
+    margin-bottom: -3px;
+    margin-right: 4px;
+}
+
+.fy-header .menu .floatmenu {
+    position: absolute;
+    left: 0px;
+    width: 198px;
+    border: 1px solid #D81E06;
+    height: 440px;
+    top: 0px;
+    display: none;
+    overflow: hidden;
+    z-index: 99;
+}
+
+.fy-header .menu .floatmenu .padding-top {
+    margin-top: 40px;
+    height: 400px;
+    overflow: hidden;
+    width: 100%;
+    background-color: white;
+}
+
+.fy-header .menu .floatmenu .padding-top .box {
+    border-bottom: 1px dashed gainsboro;
+    padding: 10px 0;
+}
+
+.fy-header .menu .floatmenu .padding-top .box .title {
+    width: 178px;
+    margin-left: 5px;
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.fy-header .menu .floatmenu .padding-top .box .link {
+    width: 188px;
+    margin-left: 5px;
+}
+
+.fy-header .menu .floatmenu .padding-top .box .link a {
+    line-height: 22px;
+    color: #181820;
+    font-size: 12px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.fy-header .menu .floatmenu .padding-top .box .link a:hover {
+    color: black;
+}
+
+.fy-swiper-ad {
+    width: 65rem;
+    margin: 0px auto;
+    height: 28rem;
+    overflow: hidden;
+    position: relative;
+    top: 123px;
+    right: 112px;
+}
+
+.fy-swiper-ad .ad {
+    width: 800px;
+    height: 400px;
+    float: right;
+}
+
+.fy-swiper-ad .ad img{
+    width: 100%;
+    height: 100%;
+
+}
+
+.fy-home-ad {
+    width: 1200px;
+    margin: 0px auto;
+    margin-top: 20px;
+    height: 180px;
+    overflow: hidden;
+}
+
+.fy-home-ad a {
+    width: 400px;
+    float: left;
+    height: 180px;
+    position: relative;
+    top: 1rem;
+
+}
+
+.fy-home-ad a img {
+    width: 100%;
+    height: 95%;
+
+}
+
+.fy-home-title {
+    width: 1200px;
+    margin: 0 auto;
+    height: 64px;
+    margin-top: 20px;
+    overflow: hidden;
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.fy-home-title .text {
+    width: 300px;
+    height: 64px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.fy-home-title .text .title {
+    height: 38px;
+    line-height: 38px;
+    font-size: 28px;
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+
+.fy-home-title .text .en {
+    height: 26px;
+    line-height: 28px;
+    font-size: 14px;
+    color: #DCDCDC;
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+
+.fy-home-product {
+    width: 1200px;
+    margin: 0 auto;
+    height: 440px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.fy-home-product .hot {
+    float: left;
+    width: 320px;
+    height: 440px;
+}
+
+.fy-home-product .hot img {
+    width: 100%;
+    height: 100%;
+}
+
+.fy-home-product .other {
+    float: left;
+    width: 880px;
+    height: 440px;
+    overflow: hidden;
+}
+
+.fy-home-product .other a {
+    float: left;
+    height: 219px;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    border-left: none;
+    overflow: hidden;
+    background-color: white;
+}
+
+.fy-home-product .other .big {
+    width: 439px;
+}
+
+.fy-home-product .other .small {
+    width: 219px;
+}
+
+.fy-home-product .other .big img {
+    width: 190px;
+    height: 190px;
+    float: left;
+    margin: 15px;
+}
+
+.fy-home-product .other .big .left {
+    width: 190px;
+    margin-left: 15px;
+    float: left;
+    height: 190px;
+    margin-top: 15px;
+}
+
+.fy-home-product .other .big .title {
+    width: 190px;
+    text-align: center;
+    float: left;
+    margin-top: 70px;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 38px;
+    line-height: 38px;
+}
+
+.fy-home-product .other .big .price {
+    width: 190px;
+    text-align: center;
+    float: left;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 38px;
+    line-height: 38px;
+    color: #D81E06;
+}
+
+.fy-home-product .other .big .line {
+    width: 190px;
+    text-align: center;
+    float: left;
+    height: 6px;
+}
+
+.fy-home-product .other .small img {
+    width: 131px;
+    height: 131px;
+    float: left;
+    margin-left: 44px;
+    margin-top: 15px;
+}
+
+
+.fy-home-product .other .small .title {
+    width: 190px;
+    text-align: center;
+    float: left;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 15px;
+}
+
+.fy-home-product .other .small .price {
+    width: 190px;
+    text-align: center;
+    float: left;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 22px;
+    line-height: 22px;
+    color: #D81E06;
+    margin-left: 15px;
+}
+
+.fy-bottom{
+    margin-top: 20px;
+    width: 100%;
+    border-top: 2px solid #D81E06;
+    text-align: center;
+    padding: 0;
+}
+.fy-bottom span{
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    margin: 50px auto;
+}
+

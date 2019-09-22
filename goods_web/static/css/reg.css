@@ -1,0 +1,64 @@
+
+
+ body{
+
+    height: 740px;
+     margin: 0 auto;
+   background: url("../img/xiangkuang.png") no-repeat;
+    background-size: 1520px 1000px;
+
+ }
+
+table{
+    margin: 0 auto;
+    margin-top: 260px;
+    height: 550px;
+    width: 558px;
+    background: url("../img/guidao.png");
+    background-size: cover;
+    border: 2px solid #eed2aa;
+    border-radius: 10px;
+    /*position:absolute ;*/
+    /*left: 481px;*/
+    /*top: 5%;*/
+    /*float: left;*/
+}
+
+ label{
+    color: #dfdfff;
+}
+
+button{
+   background: #83655b;
+    color: #353537;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+}
+button:hover{
+    background: rgba(238, 210, 170, 0.96);
+    color: rgba(200, 60, 34, 0.75);
+    border-color: white;
+}
+
+#edu{
+    background: #6c6060;
+    color: #202029;
+    border: none;
+}
+#birth,#email{
+    color: #323232;
+    background: #4c4b50;
+    border: none;
+}
+
+#uname,#password,#password2{
+    background: #3f3e43;
+    border: none;
+}
+
+#birth:hover,#email:hover,#edu:hover,#uname:hover,#password:hover,#password2:hover{
+    background: #a79a9a;
+    color: #c83c22;
+}
+

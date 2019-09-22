@@ -1,0 +1,86 @@
+
+    #play_btn {
+        position: absolute;
+        right: 6%;
+        top: 6%;
+        width: 24px;
+        height: 24px;
+        overflow: hidden;
+
+        background-color: #000;
+        border: solid 3px #ccc;
+        border-radius: 50%;
+        filter: alpha(opacity=50);
+        -moz-opacity: 0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+    }
+
+    #play_btn button {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url(../img/music.ico);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 45%;
+        background-color: transparent;
+        border: none;
+    }
+
+    #play_btn audio {
+        width: 0px;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    #play_btn.play {
+        -webkit-animation: play 3s linear infinite;
+        -moz-animation: play 3s linear infinite;
+        -ms-animation: play 3s linear infinite;
+        animation: play 3s linear infinite;
+    }
+
+    #play_btn.pause {
+        -webkit-animation: none;
+        -moz-animation: none;
+        -ms-animation: none;
+        animation: none;
+    }
+
+    @keyframes play {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-moz-keyframes play {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes play {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-ms-keyframes play {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
