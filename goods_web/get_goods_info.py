@@ -34,7 +34,6 @@ def conn_sql_2(op):
         # 关闭数据库
         conn.close()
 
-
 def get_latiao_info():
     op = "select goods_price,goods_num from goods_information where goods_name='辣条'"
     lt_info = conn_sql_2(op)
