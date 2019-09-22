@@ -288,6 +288,10 @@ def buy_car():
 
 @app.route("/order")
 def order():
+    '''
+    函数功能：进入我的订单界面
+    :return:
+    '''
     uname = session.get("uname")
 
     if uname:
