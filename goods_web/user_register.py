@@ -107,7 +107,7 @@ def check_user_name(user_name):
 
                 # 执行任意支持的SQL语句
 
-                sql = "select uname from user where uname='{}'".format(user_name)
+                sql = "select uname from shop_user where uname='{}'".format(user_name)
                 cur.execute(sql)
                 # 通过用游标获取结果
                 rows = cur.fetchone()
@@ -238,32 +238,32 @@ def send_phone_security_code(phone):
     phone 接收短信验证码的手机号
     返回值：发送成功返回验证码，失败返回False
     '''
-    while True:
-        verify_code = str(random.randint(100000, 999999))
-        # phone = get_phone()
-        try:
-            url = "http://v.juhe.cn/sms/send"
-            params = {
-                "mobile": phone,  # 接受短信的用户手机号码
-                "tpl_id": "162901",  # 您申请的短信模板ID，根据实际情况修改
-                "tpl_value": "#code#=%s" % verify_code,  # 您设置的模板变量，根据实际情况修改
-                "key": "ab75e2e54bf3044898459cb209b195e4",  # 应用APPKEY(应用详细页查询)
-            }
-            params = parse.urlencode(params).encode()
-            f = request.urlopen(url, params)
-            content = f.read()
-            res = json.loads(content)
+    # while True:
+    verify_code = str(random.randint(100000, 999999))
+        # # phone = get_phone()
+        # try:
+        #     url = "http://v.juhe.cn/sms/send"
+        #     params = {
+        #         "mobile": phone,  # 接受短信的用户手机号码
+        #         "tpl_id": "162901",  # 您申请的短信模板ID，根据实际情况修改
+        #         "tpl_value": "#code#=%s" % verify_code,  # 您设置的模板变量，根据实际情况修改
+        #         "key": "ab75e2e54bf3044898459cb209b195e4",  # 应用APPKEY(应用详细页查询)
+        #     }
+        #     params = parse.urlencode(params).encode()
+        #     f = request.urlopen(url, params)
+        #     content = f.read()
+        #     res = json.loads(content)
+        #
+        #     if res and res['error_code'] == 0:
+        #         # return verify_code, phone
+        #         break
+        #     else:
+        #         print("短信发送失败，请输入正确的手机号！")
+        #         # return False
+        # except:
+        #     print("短信发送失败，请检查网络环境！")
 
-            if res and res['error_code'] == 0:
-                # return verify_code, phone
-                break
-            else:
-                print("短信发送失败，请输入正确的手机号！")
-                # return False
-        except:
-            print("短信发送失败，请检查网络环境！")
-            # return False
-    return phone, verify_code
+    return verify_code
 
 # 循环让用户输入验证码核对验证码
 def check_security_code(ret_ecode, ret_pcode):
@@ -305,9 +305,6 @@ def conn_sql(name, passwd, sex, interest, email, birth, edu):
             # 执行任意支持的SQL语句
             sql = "insert into shop_user(uname, passwd, sex, interest, email, birth, edu) values ('{}', '{}', '{}', '{}','{}', '{}', '{}')".format(name, passwd, sex, interest, email, birth, edu)
             cur.execute(sql)
-            # 通过用游标获取结果
-            rows = cur.fetchall()
-            print(rows, type(rows))
             # 提交事务
             conn.commit()
         except Exception as e:
@@ -316,8 +313,8 @@ def conn_sql(name, passwd, sex, interest, email, birth, edu):
         finally:
             # 关闭游标
             cur.close()
-    # 关闭数据库
-    conn.close()
+            # 关闭数据库
+            conn.close()
     return True
 
 # def register_main():
