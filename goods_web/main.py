@@ -7,9 +7,9 @@
 '''
 import os
 from datetime import timedelta
-from flask import Flask, render_template, request,session,redirect,Response
+from flask import Flask, render_template, request,session,redirect,Response,jsonify,make_response
 from user_login import  check_login_passwd
-from user_register import get_passwd_md5, conn_sql, check_user_name
+from user_register import get_passwd_md5, conn_sql, check_user_name, send_phone_security_code
 from get_goods_info import *
 
 app = Flask(__name__)
@@ -36,7 +36,7 @@ def home():
 
     lt_info = get_latiao_info()
     lt_price = list(lt_info)[0][0]
-    print("lt_price",lt_price)
+    # print("lt_price",lt_price)
     lt_num = list(lt_info)[0][1]
     session["lt_price"] = lt_price
 
@@ -90,32 +90,106 @@ def login():
 @app.route('/reg', methods=["GET", "POST"])
 def reg():
     '''
-    函数功能：注册用户
+    函数功能：注册用户,通过ajax得到用户名，手机号，手机验证码，前端提交表单后得到其他注册内容，然后
+            将后端验证后的注册信息，通过ajax返回给前端。当用户名格式正确，并且验证码正确时，将用户信息写入数据库
     :return:
+            result["phone_code"] = 1 表示验证码错误
+            result["phone_code"] = 0 表示验证码正确
+            result["reg"] = 1 表示注册失败
+            result["reg"] = 0 表示注册成功
     '''
     if request.method == "GET":
         return render_template('regin.html')
-    elif request.method == "POST":
-        uname = request.form.get("uname")
-        pwd = request.form.get("password")
-        sex = request.form.get("sex")
-        interest = request.form.get("favorite")
-        email = request.form.get("email")
-        birth = request.form.get("birth")
-        edu = request.form.get("edu")
-        pwd =get_passwd_md5(pwd)
-        # 服务器端校验
-        ret = check_user_name(uname)
-        if ret == 1:
-            return '用户名格式错误！请重新输入！'
-        elif ret == 2:
-            return '用户名已存在，请重新输入！'
-        elif ret == 0:
-            ret = conn_sql(uname, pwd, sex, interest, email, birth,edu)
-            if not ret:
-                print("注册失败！")
-            else:
-                return '注册成功！<a href="/login">点击返回登录界面</a>'
+    # elif request.method == "POST":
+
+
+@app.route('/check_reg', methods=['get', 'post'])
+def regi():
+    result = {}
+    uname = request.args.get("uname")
+    # print('表单得到的用户名', uname)
+    pwd = request.args.get("password")
+    sex = request.args.get("sex")
+    interest = request.args.get("favorite")
+    email = request.args.get("email")
+
+    phone = request.args.get("phone")
+    # print("表单得到的手机号！", type(phone))
+
+    session_phone = session.get("phone")
+    # print("发送验证码的手机号", session_phone)
+
+    phone_code = session.get("phone_code")
+    # print('发送的验证码', phone_code)
+
+    user_phone_code = request.args.get("phone_code")
+    # print("用户输入的验证码", user_phone_code)
+    birth = request.args.get("birth")
+    edu = request.args.get("edu")
+
+
+    if phone == session_phone and phone_code == user_phone_code:
+        result["phone_code"] = 0
+        pwd = get_passwd_md5(pwd)
+        print(pwd)
+        ret = conn_sql(uname, pwd, sex, interest, email, birth, edu)
+        print(ret)
+        if not ret:
+            result["reg"] = 1
+        else:
+            result["reg"] = 0
+    else:
+        result["phone_code"] = 1
+        result["reg"] = 1
+    return jsonify(result)
+
+
+
+@app.route("/check_uname")
+
+def check_uname():
+    '''
+    函数功能：校验用户名是否存在,通过ajax得到用户名，
+            将后端验证后的注册信息，通过ajax返回给前端。
+    :return:result["uname_format"] = 1 表示用户名格式错误
+            result["uname_format"] = 2 表示用户名已存在
+            result["uname_format"] = 0 表示用户名可以被注册
+
+    '''
+    result = {}
+    uname = str(request.args.get("uname"))
+    print(uname)
+
+    ret = check_user_name(uname) # 校验用户名的函数
+    if ret == 1:
+        result["uname_format"] = 1
+    elif ret == 2:
+        result["uname_format"] = 2
+    elif ret == 0:
+        result["uname_format"] = 0
+        session["uname"] = uname
+    return jsonify(result)
+
+@app.route("/send_phone_code")
+def send_phone_code():
+    '''
+    函数功能：发送手机验证码
+    :return: result["err"] = 0 表示发送验证码成功
+             result["err"] = 1 表示发送验证码失败
+    '''
+    result = {}
+    phone = request.args.get("phone")
+    print("得到发送短信的手机号！",phone)
+    if phone:
+        phone_code = send_phone_security_code(phone)
+        print(phone_code)
+        session["phone_code"] = phone_code
+        session["phone"] = phone
+        result["err"] = 0
+        result["phone_code"] = phone_code
+    else:
+        result["err"] = 1
+    return jsonify(result)
 
 @app.route("/logout")
 def logout():
@@ -301,5 +375,8 @@ def order():
         return render_template("order.html", rows=rows, address=user_address)
     else:
         return "请先登录！"
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=80)
