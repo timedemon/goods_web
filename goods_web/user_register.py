@@ -35,52 +35,6 @@ def get_passwd_md5(passwd):
     print(m.hexdigest(), type(m.hexdigest()))
     return m.hexdigest()
 
-
-# 得到用户名
-def get_user_name():
-    '''
-    函数功能：得到用户名
-    :return: 返回用户名
-    '''
-    user_name = input("请输入用户名(只能包含英文字母、数字下划线，最短6位，最长15位):\n")
-    return user_name
-
-# 得到密码
-def get_user_passwd():
-    '''
-    函数功能：得到用户输入的密码
-    :return: 返回用户密码
-    '''
-    while True:
-        user_passwd = input("请输入密码(只能包含英文字母、数字下划线，最短6位，最长15位): \n")
-        user_passwd2 = input("请再次输入密码：\n")
-        if user_passwd == user_passwd2:
-            break
-        else:
-            print("两次密码输入不同，请重新输入！")
-    return user_passwd
-
-# 得到手机号
-def get_phone():
-    '''
-    函数功能：得到用户输入的手机号
-    :return: 返回用户输入的手机号
-    '''
-    phone = input("请输入手机号：\n")
-    return  phone
-
-# 得到邮箱账号昵称，邮箱账号名
-def get_email():
-    '''
-    函数功能：得到邮箱账号昵称，邮箱账号名
-    函数参数：无
-    :return:
-             email_account: 邮箱账号名
-    '''
-    email_account = input("请输入邮箱账号名：\n")
-    return  email_account
-
-
 # 验证注册用户名格式以及数据库是否已存在用户名函数
 def check_user_name(user_name):
     '''
@@ -112,7 +66,6 @@ def check_user_name(user_name):
                 # 通过用游标获取结果
                 rows = cur.fetchone()
 
-                print(rows, type(rows))
         finally:
             # 关闭数据库
             conn.close()
@@ -136,58 +89,8 @@ def check_user_passwd(user_passwd):
     else:
         return 0
 
-# 验证手机号格式函数
-def check_phone(phone):
-    '''
-    函数功能：验证手机号格式函数
-     参数描述：phone: 用户输入的手机号
-     返回值：0：手机号格式正确
-            1：手机号格式错误
-
-    '''
-    if re.match("\d{11}", phone):
-        return 0
-    else:
-        return 1
-
-# 调用验证密码格式、用户名格式、手机号格式函数
-def check_login_msg():
-    '''
-    函数功能：循环调用验证密码格式、用户名格式、手机号格式函数，直到用户输入正确
-    :return: 返回输入正确的用户名，密码，手机号
-    '''
-    while True:
-        user_name= get_user_name()
-        ret = check_user_name(user_name)
-        print(ret)
-        if not ret :
-            print(123)
-            break
-        elif ret == 1:
-            print("用户名格式错误，请重新输入！")
-
-        elif ret == 2:
-            print("用户名已存在，请重新输入！")
-
-    while True:
-        user_passed = get_user_passwd()
-        ret = check_user_passwd(user_passed)
-        if ret == 1:
-            print("密码格式不对！")
-        else:
-            break
-    while True:
-        phone = get_phone()
-        ret = check_phone(phone)
-        if ret == 1:
-            print("手机号格式不对！")
-        else:
-            break
-
-    return user_name, user_passed, phone
-
 # 发送邮箱验证码
-def send_mail_security_code():
+def send_mail_security_code(email):
     '''
     函数功能：发送邮箱验证码
     函数参数：无
@@ -196,7 +99,6 @@ def send_mail_security_code():
 
     '''
     while True:
-        email = get_email()
         l= []
         for i in range(6):
             a = chr(random.randint(65, 90))
@@ -228,7 +130,7 @@ def send_mail_security_code():
             break
         else:
             print("\n验证码发送失败！请检查邮箱是否正确！")
-    return email, security_code
+    return security_code
 
 # 发送手机验证码
 def send_phone_security_code(phone):
@@ -265,28 +167,6 @@ def send_phone_security_code(phone):
 
     return verify_code
 
-# 循环让用户输入验证码核对验证码
-def check_security_code(ret_ecode, ret_pcode):
-    '''
-    函数功能：循环让用户输入验证码，直到正确为止
-    函数参数：ret_ecode:邮箱验证码
-             ret_pcode:手机验证码
-    '''
-    while True:
-        s = input("请输入邮箱验证码:(不区分大小写！)\n")
-        if s.lower() == ret_ecode.lower():
-            print("邮箱验证成功！")
-            break
-        else:
-            print("验证码不对，请重新输入！")
-    while True:
-        s = input("请输入手机验证码: (不区分大小写！)\n")
-        if s.lower() == ret_pcode.lower():
-            print("手机验证成功！")
-            break
-        else:
-            print("验证码不对，请重新输入！")
-
 # 连接数据库,将用户信息写入数据库
 def conn_sql(name, passwd, sex, interest, email, birth, edu):
     '''
@@ -317,35 +197,4 @@ def conn_sql(name, passwd, sex, interest, email, birth, edu):
             conn.close()
     return True
 
-# def register_main():
-#     '''
-#     函数功能：主函数，调用得到用户输入信息，发送验证码，插入数据函数
-#
-#     '''
-#     # 得到用户输入信息
-#     user_msg = check_login_msg()
-#     user_name = user_msg[0]
-#     user_passwd = user_msg[1]
-#     phone = user_msg[2]
-#     md5_passwd = get_passwd_md5(user_passwd)
-#     print(user_msg)
-#
-#     # 发送验证码
-#     ret1 = send_mail_security_code()
-#     email = ret1[0]
-#     email_security_code =  ret1[1]
-#
-#     # 写入数据库
-#     ret2 = send_phone_security_code(phone)
-#     phone = ret2[0]
-#     phone_security_code = ret2[1]
-#
-#     check_security_code(email_security_code, phone_security_code)
-#
-#     conn_sql(user_name, md5_passwd, phone, email)
-#
-#
-#
-#
-# if __name__ == '__main__':
-#     register_main()
+
