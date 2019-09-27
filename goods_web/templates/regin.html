@@ -4,55 +4,69 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes"/>
         <title>用户注册</title>
-        <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
         <link rel="stylesheet" href="../static/css/reg.css" type="text/css">
-        <link rel="stylesheet" href="../static/img/guidao.png" type="text/css"/>
+        <link rel="icon" href="../static/img/lufei.ico" type="image/x-icon"/>
+        <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery-form.js') }}"></script>
         <script>
         window.onload = function () {
-            document.forms[0].onsubmit = function () {
-                var uname = document.getElementsByName("uname")[0].value;
-                var pwd = document.getElementsByName("password")[0].value;
-                var pwd_reg=/^\w{4,16}$/;
-                var uname_reg = /^\w{4,16}$/;
-                var pwd2 = document.getElementsByName("password2")[0].value;
+         $('input[name="uname"]').blur(function () {
+             var uname = $("#uname").val();
+             var uname_reg = /^\w{4,16}$/;
+             if (uname.replace(/(^\s*)|(\s*$)/g, "") === "") {
+                 $("#uname_tips").text("用户名不能为空！");
+                 $("#uname_tips").css("color", "red");
+             }else if ( !uname_reg.test(uname)) {
+                 $("#uname_tips").text("用户名格式错误！");
+                 $("#uname_tips").css("color", "red");
+             }else {
+                 $("#uname_tips").text("√");
+                 $("#uname_tips").css("color", "green");
+             }
+        });
+        };
 
-                if (uname.replace(/(^\s*)|(\s*$)/g, "") === "") {
-                    document.getElementById("uname_tips").innerText = "用户名不能为空！";
-                    document.getElementById("uname_tips").style.color = "red";
-                    return false;
-                }else if ( !uname_reg.test(uname)) {
-                    document.getElementById("uname_tips").innerText = "用户名格式错误！";
-                    document.getElementById("uname_tips").style.color = "red";
-                    return false;
-                }else if (pwd.replace(/(^\s*)|(\s*$)/g, "") === "") {
-                    document.getElementById("pwd_tips").innerText = "密码不能为空！";
-                    document.getElementById("pwd_tips").style.color = "red";
-                    return false;
-                }else if ( !pwd_reg.test(pwd)) {
-                    document.getElementById("pwd_tips").innerText = "密码格式错误！";
-                    document.getElementById("pwd_tips").style.color = "red";
-                    return false;
-                }else if ( pwd !== pwd2) {
-                    document.getElementById("pwd2_tips").innerText = "两次密码不相同！";
-                    document.getElementById("pwd2_tips").style.color = "red";
-                    return false;
-                }
-            };
+        window.onload = function () {
+         $('input[name="password"]').blur(function () {
+             var pwd = $("#password").val();
+             var pwd_reg=/^\w{4,16}$/;
+             var pwd2 = $("#password2").val();
+
+              if (pwd.trim().length == 0) {
+                 $("#pwd_tips").text("密码不能为空！");
+                 $("#pwd_tips").css("color", "red");
+                 {#$("#password").focus();#}
+             }else if ( !pwd_reg.test(pwd)) {
+                 $("#pwd_tips").text("密码格式错误！");
+                 $("#pwd_tips").css("color", "red");
+                 {#$("#password").focus();#}
+             }else if ( pwd !== pwd2) {
+                 $("#pwd2_tips").text("两次密码不相同！");
+                 $("#pwd2_tips").css("color", "red");
+                 {#$("#password2").focus();#}
+             }else if (pwd === pwd2) {
+                 $("#pwd2_tips").text("√");
+                 $("#pwd2_tips").css("color", "green");
+             }
+        });
         };
         </script>
 
+        <script src="{{ url_for('static', filename='js/reg.js') }}"></script>
     </head>
     <body>
         <div class="content" >
          <form action="" method="post">
             <table border="0" cellpadding="5px" align="center">
-                <tr><td><label for="uname">用户名：</label></td><td><input type="text" name="uname" id="uname" placeholder="请输入用户名" ><span id="uname_tips">只能包含英文字母、数字下划线，最短4位，最长16位</span></td></tr>
+                <tr><td><label for="uname">用户名：</label></td><td><input type="text" name="uname" id="uname" placeholder="请输入用户名" autofocus><span id="uname_tips">只能包含英文字母、数字下划线，最短4位，最长16位</span></td></tr>
                 <tr><td><label for="password">密码：</label></td><td><input type="password" name="password" id="password" placeholder="请输入密码"><span id="pwd_tips">只能包含英文字母、数字下划线，最短4位，最长16位</span></td></tr>
                 <tr><td><label for="password">确认密码：</label></td><td><input type="password" name="password2" id="password2" placeholder="请输入密码"><span id="pwd2_tips"></span></td></tr>
                 <!--<tr><td><label>手机号：</label></td><td><input type="text" name="phone" id="phone" placeholder="请输入手机号"></td></tr>-->
                 <tr><td><label>性别：</label></td><td><input type="radio" name="sex" value="男" checked>男&nbsp;&nbsp;<input type="radio" name="sex" value="女">女</td></tr>
                 <tr><td><label>兴趣：</label></td><td><input type="checkbox" name="favorite" value="篮球">篮球&nbsp;&nbsp;<input type="checkbox" name="favorite" value="足球">足球&nbsp;&nbsp;<input type="checkbox" name="favorite" checked value="乒乓球">乒乓球&nbsp;&nbsp;<input type="checkbox" name="favorite" value="羽毛球">羽毛球</td></tr>
                 <tr><td><label for="email">邮箱：</label></td><td><input type="email" name="email" id="email" placeholder="请输入邮箱"><span id="email_tips">123@123.com</span></td></tr>
+                <tr><td><label for="phone">手机号：</label></td><td><input type="text" name="phone" id="phone" placeholder="请输入手机号"> <button type="button" id="send_phone_code">发送验证码</button><span id="phone_tips"></span></td></tr>
+                <tr><td><label for="phone_code">请输入验证码</label><td><input type="text" name="phone_code" id="phone_code"><span id="phone_code_tips"></span></td></tr>
                 <tr><td><label for="birth">生日：</label></td><td><input type="date" name="birth" id="birth"></td></tr>
                 <!--<tr><td valign="top"><label for="intro">自我介绍：</label></td><td><textarea name="intro" id="intro" placeholder="简单介绍一下自己吧~" rows="5" cols="30"></textarea></td></tr>-->
                 <tr>
@@ -70,7 +84,7 @@
                     </td>
                 </tr>
                 <tr><td colspan="2" align="center">
-                    <button type="submit" name="submit" id="submit">注 册</button><!--<input type="submit" name="submit" id="submit" value="注 册">--></td></tr>
+                    <button type="button" name="submit" id="submit">注 册</button><!--<input type="submit" name="submit" id="submit" value="注 册">--></td></tr>
             </table>
         </form>
         </div>
