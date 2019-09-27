@@ -34,26 +34,17 @@ def home():
     global lt_price, lt_num, kele_price, kele_num, dounai_price, dounai_num, binggan_price, binggan_num
     uname = session.get("uname")
 
-    lt_info = get_latiao_info()
-    lt_price = list(lt_info)[0][0]
-    # print("lt_price",lt_price)
-    lt_num = list(lt_info)[0][1]
-    session["lt_price"] = lt_price
+    goods_info = get_goods_info()
+    # print(goods_info,123)
+    lt_price = goods_info[0][1]
+    kele_price = goods_info[1][1]
+    dounai_price = goods_info[2][1]
+    binggan_price = goods_info[3][1]
 
-    kele_info = get_kele_info()
-    kele_price = list(kele_info)[0][0]
-    kele_num = list(lt_info)[0][1]
-    session["kele_price"] = kele_price
-
-    dounai_info = get_dounai_info()
-    dounai_price = list(dounai_info)[0][0]
-    dounai_num = list(lt_info)[0][1]
-    session["dounai_price"] = dounai_price
-
-    binggan_info = get_binggan_info()
-    binggan_price = list(binggan_info)[0][0]
-    binggan_num = list(lt_info)[0][1]
-    session["binggan_price"] = binggan_price
+    lt_num = goods_info[0][2]
+    kele_num = goods_info[1][2]
+    dounai_num = goods_info[2][2]
+    binggan_num = goods_info[3][2]
 
     rsp =Response(render_template("shop.html", uname=uname, lt_price=lt_price, kele_price= kele_price, dounai_price= dounai_price,
                                   binggan_price=binggan_price))
@@ -100,11 +91,13 @@ def reg():
     '''
     if request.method == "GET":
         return render_template('regin.html')
-    # elif request.method == "POST":
-
 
 @app.route('/check_reg', methods=['get', 'post'])
 def regi():
+    '''
+    函数功能：校验验证码是否正确，若正确就将注册信息写入数据库
+    :return:
+    '''
     result = {}
     uname = request.args.get("uname")
     # print('表单得到的用户名', uname)
