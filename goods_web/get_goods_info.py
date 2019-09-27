@@ -16,43 +16,35 @@ def conn_sql_2(op):
     :param op: 数据库操作
     :return: rows: 返回查询到的商品信息
     '''
-    # 创建对象，连接数据库
-    conn = pymysql.connect(db_conf["db_server"], db_conf["db_user"], db_conf["db_password"], db_conf["db_name"])
-    # 获取一个游标对象，用于执行sql语句
-    try:
-        with conn.cursor() as cur:
+    while True:
+        try:
+            # 创建对象，连接数据库
+            conn = pymysql.connect(db_conf["db_server"], db_conf["db_user"], db_conf["db_password"], db_conf["db_name"])
+            # 获取一个游标对象，用于执行sql语句
+            try:
+                with conn.cursor() as cur:
 
-            # 执行任意支持的SQL语句
-            sql = op
-            cur.execute(sql)
-            conn.commit()
-            # 通过用游标获取结果
-            rows = cur.fetchall()
-            print(rows, type(rows))
-            return rows
-    finally:
-        # 关闭数据库
-        conn.close()
+                    # 执行任意支持的SQL语句
+                    sql = op
+                    cur.execute(sql)
+                    conn.commit()
+                    # 通过用游标获取结果
+                    rows = cur.fetchall()
+                    # print(rows, type(rows))
+            finally:
+                # 关闭数据库
+                conn.close()
+                return rows
+        except Exception as e:
+            print("连接数据库失败！",e)
+            continue
 
-def get_latiao_info():
-    op = "select goods_price,goods_num from goods_information where goods_name='辣条'"
-    lt_info = conn_sql_2(op)
-    return lt_info
 
-def get_kele_info():
-    op = "select goods_price,goods_num from goods_information where goods_name='可乐'"
-    kele_info = conn_sql_2(op)
-    return kele_info
 
-def get_dounai_info():
-    op = "select goods_price,goods_num from goods_information where goods_name='豆奶'"
-    dounai_info = conn_sql_2(op)
-    return dounai_info
-
-def get_binggan_info():
-    op = "select goods_price,goods_num from goods_information where goods_name='饼干'"
-    binggan_info = conn_sql_2(op)
-    return binggan_info
+def get_goods_info():
+    op = "select goods_name, goods_price,goods_num from goods_information "
+    goods_info = conn_sql_2(op)
+    return goods_info
 
 def add_buy_car(op1, op2, op3):
     '''
