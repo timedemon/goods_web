@@ -13,7 +13,8 @@ from user_register import get_passwd_md5, conn_sql, check_user_name, send_phone_
 from get_goods_info import *
 
 app = Flask(__name__)
-app.secret_key = os.urandom(16)
+#app.secret_key = os.urandom(16)
+app.secret_key = b'\x06\x14\xdb\x9e\xae\xa0)/\x97\xe1\xd7$\x02\xf1]n\x0f{\x1c6\x8cI\x12\x1e'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 db_conf = json.load(open("server.json"))
 
